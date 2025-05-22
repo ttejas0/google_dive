@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { mockFiles, mockFolder } from "../lib/mock-data";
+import { mockFiles, mockFolders } from "../lib/mock-data";
 import { Folder, FileIcon, Upload, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
@@ -15,7 +15,7 @@ export default function GoogleDriveClone() {
   };
 
   const getCurrentFolders = () => {
-    return mockFolder.filter((folder) => folder.parent === currentFolder);
+    return mockFolders.filter((folder) => folder.parent === currentFolder);
   };
 
   const handleFolderClick = (folderId: string) => {
@@ -27,7 +27,7 @@ export default function GoogleDriveClone() {
     let currentId = currentFolder;
 
     while (currentId !== "root") {
-      const folder = mockFolder.find((file) => file.id === currentId);
+      const folder = mockFolders.find((file) => file.id === currentId);
       if (folder) {
         breadcrumbs.unshift(folder);
         currentId = folder.parent ?? "root";
