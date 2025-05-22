@@ -1,3 +1,4 @@
+"use server-only";
 import {
   bigint,
   text,
