@@ -11,7 +11,7 @@ export const createTables = singlestoreTableCreator(
   (name) => `gdrive-cln.${name}`,
 );
 
-export const files = createTables(
+export const files_table = createTables(
   "files_table",
   {
     id: bigint("id", { mode: "number", unsigned: true })
@@ -27,7 +27,7 @@ export const files = createTables(
   },
 );
 
-export const folders = createTables(
+export const folders_table = createTables(
   "folders_table",
   {
     id: bigint("id", { mode: "number", unsigned: true })
