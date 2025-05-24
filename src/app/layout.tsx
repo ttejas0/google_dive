@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { PostHogProvider } from "./_providers/posthog-providers";
 
 export const metadata: Metadata = {
   title: "Drive Clone",
@@ -24,10 +25,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${geist.variable}`}>
-        <body>
-          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-          {children}
-        </body>
+        <PostHogProvider>
+          <body>
+            <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+            {children}
+          </body>
+        </PostHogProvider>
       </html>
     </ClerkProvider>
   );
