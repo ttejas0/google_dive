@@ -1,14 +1,14 @@
-"use server-only";
 import {
   bigint,
   text,
   index,
   singlestoreTableCreator,
   int,
+  timestamp,
 } from "drizzle-orm/singlestore-core";
 
 export const createTables = singlestoreTableCreator(
-  (name) => `gdrive-cln.${name}`,
+  (name) => `gdrive_cln.${name}`,
 );
 
 export const files_table = createTables(
@@ -17,13 +17,18 @@ export const files_table = createTables(
     id: bigint("id", { mode: "number", unsigned: true })
       .primaryKey()
       .autoincrement(),
+    ownerId: text("owner_id").notNull(),
     name: text("name").notNull(),
     size: int("size").notNull(),
     url: text("url").notNull(),
     parent: bigint("parent", { mode: "number", unsigned: true }).notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (t) => {
-    return [index("parent_index").on(t.parent)];
+    return [
+      index("parent_index").on(t.parent),
+      index("owner_id_index").on(t.ownerId),
+    ];
   },
 );
 
@@ -38,9 +43,13 @@ export const folders_table = createTables(
     ownerId: text("owner_id").notNull(),
     name: text("name").notNull(),
     parent: bigint("parent", { mode: "number", unsigned: true }),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (t) => {
-    return [index("parent_index").on(t.parent)];
+    return [
+      index("parent_index").on(t.parent),
+      index("owner_id_index").on(t.ownerId),
+    ];
   },
 );
 
