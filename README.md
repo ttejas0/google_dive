@@ -2,6 +2,22 @@
 
 This is a Google Drive Clone built using Next.js, Clerk, and SingleStore.
 
+## Tech Stack
+
+- Next.js
+- Clerk
+- SingleStore
+- Drizzle ORM
+- Shadcn UI
+- UploadThing
+- Tailwind CSS
+- Posthog
+
+## TODO
+
+- [] Add a button to create a folder
+- [] Add a button to delete a folder
+
 ## Features
 
 - User Authentication using Clerk
