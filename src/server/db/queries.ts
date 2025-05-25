@@ -5,7 +5,7 @@ import {
   folders_table as folderSchema,
   type DB_FileType,
 } from "~/server/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 
 export const QUERIES = {
   getFolders: function (folderId: number) {
@@ -44,6 +44,16 @@ export const QUERIES = {
       .select()
       .from(folderSchema)
       .where(eq(folderSchema.id, folderId));
+    return folder[0];
+  },
+
+  getRootFolderForUser: async function (userId: string) {
+    const folder = await db
+      .select()
+      .from(folderSchema)
+      .where(
+        and(eq(folderSchema.ownerId, userId), isNull(folderSchema.parent)),
+      );
     return folder[0];
   },
 };
