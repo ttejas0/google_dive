@@ -70,16 +70,18 @@ export default function DriveContents(props: {
             ))}
           </ul>
         </div>
-        <UploadButton
-          endpoint="driveUploader"
-          input={{ folderId: props.currentFolderId }}
-          onClientUploadComplete={() => {
-            navigate.refresh();
-          }}
-          onUploadError={(error: Error) => {
-            alert(`ERROR! ${error.message}`);
-          }}
-        />
+        <div className="mt-6">
+          <UploadButton
+            endpoint="driveUploader"
+            input={{ folderId: props.currentFolderId }}
+            onClientUploadComplete={() => {
+              navigate.refresh();
+            }}
+            onUploadError={(error: Error) => {
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
