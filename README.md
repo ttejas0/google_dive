@@ -32,6 +32,8 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="clerk_publishable_key"
 CLERK_SECRET_KEY="clerk_secret_key"
 
 UPLOADTHING_TOKEN="uploadthing_token"
+
+NEXT_PUBLIC_POSTHOG_KEY=phc_....
 ```
 
 ```bash
