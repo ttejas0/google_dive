@@ -11,7 +11,7 @@ import { PostHogProvider } from "./_providers/posthog-providers";
 export const metadata: Metadata = {
   title: "Drive Clone",
   description: "A clone of Google Drive built with Next.js and Clerk",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/favicon.png" }],
 };
 
 const geist = Geist({
