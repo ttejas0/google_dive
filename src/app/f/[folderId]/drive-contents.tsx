@@ -1,6 +1,6 @@
 "use client";
 
-import { Upload, ChevronRight } from "lucide-react";
+import { Upload, ChevronRight, PlusIcon } from "lucide-react";
 import { FileRow, FolderRow } from "./file-row";
 import type { files_table, folders_table } from "~/server/db/schema";
 import Link from "next/link";
@@ -13,6 +13,8 @@ import {
 } from "@clerk/nextjs";
 import { UploadButton } from "~/components/ui/uploadthings";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import CreateFolderModal from "~/components/createFolder";
 
 export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[];
@@ -21,6 +23,7 @@ export default function DriveContents(props: {
   currentFolderId: number;
 }) {
   const navigate = useRouter();
+  const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-900 p-8 text-gray-100">
@@ -58,7 +61,13 @@ export default function DriveContents(props: {
               <div className="col-span-6">Name</div>
               <div className="col-span-2">Type</div>
               <div className="col-span-2">Size</div>
-              <div className="col-span-1"></div>
+              <div className="col-span-1">
+                <PlusIcon
+                  className="cursor-pointer transition-colors hover:text-gray-300"
+                  size={20}
+                  onClick={() => setIsCreateFolderOpen(true)}
+                />
+              </div>
             </div>
           </div>
           <ul>
@@ -82,6 +91,12 @@ export default function DriveContents(props: {
             }}
           />
         </div>
+        {/* CreateFolder Dialog */}
+        <CreateFolderModal
+          folderId={props.currentFolderId}
+          isOpen={isCreateFolderOpen}
+          onClose={() => setIsCreateFolderOpen(false)}
+        />
       </div>
     </div>
   );

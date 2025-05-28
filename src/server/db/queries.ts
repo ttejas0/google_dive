@@ -73,6 +73,24 @@ export const MUTATIONS = {
       ownerId: input.userId,
     });
   },
+
+  createFolder: async function (input: {
+    folder: {
+      name: string;
+      parent: number;
+    };
+    userId: string;
+  }) {
+    return await db.insert(folderSchema).values({
+      ...input.folder,
+      ownerId: input.userId,
+    });
+  },
+
+  deleteFolder: async function (folderId: number) {
+    return await db.delete(folderSchema).where(eq(folderSchema.id, folderId));
+  },
+
   onboardUser: async function (userId: string) {
     const rootFolder = await db
       .insert(folderSchema)
