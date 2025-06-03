@@ -30,6 +30,7 @@ export function FileRow(props: { file: typeof files_table.$inferSelect }) {
             variant="ghost"
             onClick={() => deleteFile(file.id)}
             aria-label="Delete file"
+            className="cursor-pointer hover:bg-red-500 hover:text-white"
           >
             <Trash2Icon size={20} />
           </Button>
@@ -66,6 +67,7 @@ export function FolderRow(props: {
             variant="ghost"
             onClick={() => deleteFolder(folder.id)}
             aria-label="Delete folder"
+            className="cursor-pointer hover:bg-red-500 hover:text-white"
           >
             <Trash2Icon size={20} />
           </Button>
